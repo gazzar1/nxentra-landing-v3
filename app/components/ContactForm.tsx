@@ -1,7 +1,9 @@
 "use client";
 import { useState, FormEvent } from "react";
+import { useLang } from "./LangProvider";
 
 export default function ContactForm() {
+  const { t } = useLang();
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -43,7 +45,7 @@ export default function ContactForm() {
           name="name"
           type="text"
           required
-          placeholder="Your name"
+          placeholder={t("formName")}
           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition"
         />
       </div>
@@ -52,7 +54,7 @@ export default function ContactForm() {
           name="email"
           type="email"
           required
-          placeholder="Email address"
+          placeholder={t("formEmailPlaceholder")}
           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition"
         />
       </div>
@@ -61,11 +63,11 @@ export default function ContactForm() {
           name="role"
           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition appearance-none"
         >
-          <option value="sme_owner" className="bg-zinc-900">SME Owner</option>
-          <option value="accountant" className="bg-zinc-900">Accountant</option>
-          <option value="ecommerce" className="bg-zinc-900">E-commerce Merchant</option>
-          <option value="investor" className="bg-zinc-900">Investor</option>
-          <option value="partner" className="bg-zinc-900">Partner / Integrator</option>
+          <option value="sme_owner" className="bg-zinc-900">{t("formRoleSme")}</option>
+          <option value="accountant" className="bg-zinc-900">{t("formRoleAccountant")}</option>
+          <option value="ecommerce" className="bg-zinc-900">{t("formRoleEcommerce")}</option>
+          <option value="investor" className="bg-zinc-900">{t("formRoleInvestor")}</option>
+          <option value="partner" className="bg-zinc-900">{t("formRolePartner")}</option>
         </select>
       </div>
       <div>
@@ -73,7 +75,7 @@ export default function ContactForm() {
           name="message"
           rows={4}
           required
-          placeholder="Tell us about your business..."
+          placeholder={t("formMessage")}
           className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50 transition resize-none"
         />
       </div>
@@ -82,7 +84,7 @@ export default function ContactForm() {
         <p className="text-sm text-red-400">{errorMsg}</p>
       )}
       {status === "sent" && (
-        <p className="text-sm text-emerald-400">Message sent! We&apos;ll get back to you shortly.</p>
+        <p className="text-sm text-emerald-400">{t("formSent")}</p>
       )}
 
       <button
@@ -90,7 +92,7 @@ export default function ContactForm() {
         disabled={status === "sending"}
         className="w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
       >
-        {status === "sending" ? "Sending..." : "Send message"}
+        {status === "sending" ? t("formSending") : t("formSend")}
       </button>
     </form>
   );

@@ -116,38 +116,22 @@ function IconProjection() {
 /*  Data                                                                */
 /* ------------------------------------------------------------------ */
 
-const modules = [
-  { icon: <IconAccounting />, name: "Accounting", desc: "GL, chart of accounts, journal entries, multi-currency, bank reconciliation", color: "text-blue-400" },
-  { icon: <IconSales />, name: "Sales & Invoicing", desc: "Invoices, tax codes, posting profiles, customer receipts, AR aging", color: "text-emerald-400" },
-  { icon: <IconInventory />, name: "Inventory", desc: "Warehouses, stock balances, COGS tracking, weighted average costing", color: "text-amber-400" },
-  { icon: <IconPurchases />, name: "Purchases", desc: "Purchase bills, vendor payments, AP aging, multi-currency payables", color: "text-violet-400" },
-  { icon: <IconProperties />, name: "Properties", desc: "Unit management, lease contracts, rent collection, tenant accounting", color: "text-rose-400" },
-  { icon: <IconClinic />, name: "Clinic", desc: "Patient billing, appointment revenue, insurance claims, medical AR", color: "text-cyan-400" },
-  { icon: <IconShopify />, name: "Shopify Sync", desc: "Auto-ingest orders, refunds, and payouts. Real-time financial mapping.", color: "text-green-400" },
-  { icon: <IconStripe />, name: "Stripe Connect", desc: "Payment reconciliation, fee tracking, payout matching, multi-currency", color: "text-indigo-400" },
+const modulesMeta = [
+  { icon: <IconAccounting />, nameKey: "modAccounting", descKey: "modAccountingDesc", color: "text-blue-400" },
+  { icon: <IconSales />, nameKey: "modSales", descKey: "modSalesDesc", color: "text-emerald-400" },
+  { icon: <IconInventory />, nameKey: "modInventory", descKey: "modInventoryDesc", color: "text-amber-400" },
+  { icon: <IconPurchases />, nameKey: "modPurchases", descKey: "modPurchasesDesc", color: "text-violet-400" },
+  { icon: <IconProperties />, nameKey: "modProperties", descKey: "modPropertiesDesc", color: "text-rose-400" },
+  { icon: <IconClinic />, nameKey: "modClinic", descKey: "modClinicDesc", color: "text-cyan-400" },
+  { icon: <IconShopify />, nameKey: "modShopify", descKey: "modShopifyDesc", color: "text-green-400" },
+  { icon: <IconStripe />, nameKey: "modStripe", descKey: "modStripeDesc", color: "text-indigo-400" },
 ];
 
-const whyCards = [
-  {
-    title: "Universal Ingestion Engine",
-    desc: "Every order, payment, refund, and payout from any source becomes an immutable financial event. Shopify, Stripe, POS, bank feeds \u2014 all normalized into one ledger. No CSV imports. No manual entry. No data drift.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-  },
-  {
-    title: "Auto-Reconciliation Engine",
-    desc: "Nxentra matches transactions across sources automatically. Bank payouts reconcile against Shopify orders. Stripe fees match journal entries. Discrepancies surface instantly \u2014 not at month-end when it's too late.",
-    gradient: "from-cyan-500/20 to-violet-500/20",
-  },
-  {
-    title: "Immutable Audit Trail",
-    desc: "Every number on every report traces back to a source event. Nothing is manually edited. Nothing is overwritten. Your books aren't just accurate \u2014 they're provably accurate. Auditors love this.",
-    gradient: "from-violet-500/20 to-rose-500/20",
-  },
-  {
-    title: "Multi-Currency Native",
-    desc: "EGP, USD, SAR, EUR \u2014 all in one ledger. Automatic exchange rate lookups, currency revaluation, and unrealized gain/loss tracking. Built for businesses that operate across borders.",
-    gradient: "from-rose-500/20 to-amber-500/20",
-  },
+const whyCardsMeta = [
+  { titleKey: "why1Title", descKey: "why1Desc", gradient: "from-blue-500/20 to-cyan-500/20" },
+  { titleKey: "why2Title", descKey: "why2Desc", gradient: "from-cyan-500/20 to-violet-500/20" },
+  { titleKey: "why3Title", descKey: "why3Desc", gradient: "from-violet-500/20 to-rose-500/20" },
+  { titleKey: "why4Title", descKey: "why4Desc", gradient: "from-rose-500/20 to-amber-500/20" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -243,15 +227,15 @@ export default function Home() {
               <div className="mt-10 flex items-center gap-6 text-xs text-zinc-500">
                 <span className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
-                  Free to start
+                  {t("trustFree")}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
-                  No credit card
+                  {t("trustNoCard")}
                 </span>
                 <span className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
-                  Setup in minutes
+                  {t("trustSetup")}
                 </span>
               </div>
             </div>
@@ -270,7 +254,7 @@ export default function Home() {
               </div>
               {/* Floating badge */}
               <div className="absolute -bottom-4 -left-4 rounded-lg border border-white/10 bg-[#0f1729] px-4 py-2 shadow-lg md:-left-8">
-                <div className="text-xs text-zinc-500">Live on</div>
+                <div className="text-xs text-zinc-500">{t("liveOn")}</div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-green-400 font-semibold text-sm">Shopify</span>
                   <span className="text-zinc-600">&bull;</span>
@@ -289,23 +273,21 @@ export default function Home() {
             <div>
               <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-500/20 bg-green-500/10 px-3 py-1">
                 <IconShopify />
-                <span className="text-xs font-medium text-green-300">Shopify Integration</span>
+                <span className="text-xs font-medium text-green-300">{t("shopifyBadge")}</span>
               </div>
               <h2 className="text-3xl font-bold text-white md:text-4xl">
-                Selling on Shopify?<br />
-                <span className="text-green-400">Your accounting is already done.</span>
+                {t("shopifyH2a")}<br />
+                <span className="text-green-400">{t("shopifyH2b")}</span>
               </h2>
               <p className="mt-4 text-zinc-400 leading-relaxed max-w-lg">
-                Every Shopify order, refund, discount, tax, and payout automatically becomes a proper double-entry journal entry.
-                COGS calculated at weighted average cost. Multi-currency conversions handled.
-                Inventory levels synced in real-time.
+                {t("shopifyDesc")}
               </p>
               <ul className="mt-6 space-y-3">
                 {[
-                  "Orders auto-post to Sales, AR, Tax, and Inventory accounts",
-                  "Shopify payouts reconcile against bank deposits automatically",
-                  "Refunds create proper reversal entries \u2014 no manual corrections",
-                  "Multi-currency orders converted at transaction-date rates",
+                  t("shopifyBullet1"),
+                  t("shopifyBullet2"),
+                  t("shopifyBullet3"),
+                  t("shopifyBullet4"),
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-sm text-zinc-300">
                     <svg className="w-5 h-5 text-green-400 mt-0.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
@@ -317,17 +299,17 @@ export default function Home() {
                 href="https://app.nxentra.com"
                 className="mt-8 inline-flex rounded-lg bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-500 transition"
               >
-                Connect your Shopify store &rarr;
+                {t("shopifyCta")} &rarr;
               </a>
             </div>
             <div className="relative flex items-center justify-center">
               {/* Shopify flow visualization */}
               <div className="w-full max-w-md space-y-3">
                 {[
-                  { label: "Shopify Order #1042", sub: "3 items \u00b7 $287.50 \u00b7 USD", color: "border-green-500/30 bg-green-500/5" },
-                  { label: "Ingestion Engine", sub: "Normalize \u2192 Map accounts \u2192 Validate", color: "border-blue-500/30 bg-blue-500/5" },
-                  { label: "Journal Entry JE-1-000847", sub: "DR Accounts Receivable $287.50 \u00b7 CR Sales $250.00 \u00b7 CR Tax $37.50", color: "border-cyan-500/30 bg-cyan-500/5" },
-                  { label: "Auto-Reconciled", sub: "Matched with Shopify Payout #P-2891", color: "border-emerald-500/30 bg-emerald-500/5" },
+                  { label: t("shopifyFlow1Label"), sub: t("shopifyFlow1Sub"), color: "border-green-500/30 bg-green-500/5" },
+                  { label: t("shopifyFlow2Label"), sub: t("shopifyFlow2Sub"), color: "border-blue-500/30 bg-blue-500/5" },
+                  { label: t("shopifyFlow3Label"), sub: t("shopifyFlow3Sub"), color: "border-cyan-500/30 bg-cyan-500/5" },
+                  { label: t("shopifyFlow4Label"), sub: t("shopifyFlow4Sub"), color: "border-emerald-500/30 bg-emerald-500/5" },
                 ].map((step, i) => (
                   <div key={i}>
                     <div className={`rounded-lg border ${step.color} p-4`}>
@@ -356,14 +338,14 @@ export default function Home() {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {modules.map((m) => (
+            {modulesMeta.map((m) => (
               <div
-                key={m.name}
+                key={m.nameKey}
                 className="card-glow group rounded-xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition"
               >
                 <div className={`mb-4 ${m.color}`}>{m.icon}</div>
-                <h3 className="font-semibold text-white">{m.name}</h3>
-                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">{m.desc}</p>
+                <h3 className="font-semibold text-white">{t(m.nameKey)}</h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">{t(m.descKey)}</p>
               </div>
             ))}
           </div>
@@ -381,13 +363,13 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {whyCards.map((card) => (
+            {whyCardsMeta.map((card) => (
               <div
-                key={card.title}
+                key={card.titleKey}
                 className={`rounded-xl border border-white/5 bg-gradient-to-br ${card.gradient} p-8 hover:border-white/10 transition`}
               >
-                <h3 className="text-xl font-bold text-white">{card.title}</h3>
-                <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{card.desc}</p>
+                <h3 className="text-xl font-bold text-white">{t(card.titleKey)}</h3>
+                <p className="mt-3 text-sm text-zinc-400 leading-relaxed">{t(card.descKey)}</p>
               </div>
             ))}
           </div>
@@ -410,13 +392,9 @@ export default function Home() {
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/10 text-blue-400">
                 <IconIngestion />
               </div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-blue-400">Engine 01</div>
-              <h3 className="text-lg font-bold text-white">Universal Ingestion</h3>
-              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">
-                Connect any source &mdash; Shopify, Stripe, POS, bank feeds, CSV.
-                Every transaction is normalized into an immutable financial event.
-                No data loss. No format wars.
-              </p>
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-blue-400">{t("eng1Label")}</div>
+              <h3 className="text-lg font-bold text-white">{t("eng1Title")}</h3>
+              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">{t("eng1Desc")}</p>
             </div>
 
             {/* Engine 2 */}
@@ -424,13 +402,9 @@ export default function Home() {
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-cyan-500/10 text-cyan-400">
                 <IconReconciliation />
               </div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">Engine 02</div>
-              <h3 className="text-lg font-bold text-white">Auto-Reconciliation</h3>
-              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">
-                Cross-reference transactions across all sources automatically.
-                Bank statements match invoices. Shopify payouts match deposits.
-                Discrepancies flagged in real-time, not at month-end.
-              </p>
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-cyan-400">{t("eng2Label")}</div>
+              <h3 className="text-lg font-bold text-white">{t("eng2Title")}</h3>
+              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">{t("eng2Desc")}</p>
             </div>
 
             {/* Engine 3 */}
@@ -438,13 +412,9 @@ export default function Home() {
               <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-violet-500/10 text-violet-400">
                 <IconProjection />
               </div>
-              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-violet-400">Engine 03</div>
-              <h3 className="text-lg font-bold text-white">Live Projections</h3>
-              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">
-                Trial balance, P&L, balance sheet, cash flow &mdash; all derived from events in real-time.
-                No month-end close needed. No manual adjustments.
-                Your reports are always current.
-              </p>
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-violet-400">{t("eng3Label")}</div>
+              <h3 className="text-lg font-bold text-white">{t("eng3Title")}</h3>
+              <p className="mt-3 text-sm text-zinc-500 leading-relaxed">{t("eng3Desc")}</p>
             </div>
           </div>
         </div>
@@ -478,9 +448,9 @@ export default function Home() {
       <section className="py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white md:text-4xl">Real-time financial visibility</h2>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">{t("chartsTitle")}</h2>
             <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">
-              Every chart is derived from live events. Revenue, expenses, cash flow, and reconciliation rates update as transactions flow in.
+              {t("chartsSub")}
             </p>
           </div>
           <DashboardCharts />
@@ -494,14 +464,14 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
             {[
-              { value: "8+", label: "Modules" },
-              { value: "15+", label: "Currencies supported" },
-              { value: "3", label: "Core engines" },
-              { value: "<5min", label: "Setup time" },
+              { value: "8+", labelKey: "statModules" },
+              { value: "15+", labelKey: "statCurrencies" },
+              { value: "3", labelKey: "statEngines" },
+              { value: "<5min", labelKey: "statSetup" },
             ].map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.labelKey}>
                 <div className="text-3xl font-bold text-gradient md:text-4xl">{stat.value}</div>
-                <div className="mt-2 text-sm text-zinc-500">{stat.label}</div>
+                <div className="mt-2 text-sm text-zinc-500">{t(stat.labelKey)}</div>
               </div>
             ))}
           </div>
@@ -528,7 +498,7 @@ export default function Home() {
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                   </span>
                   <div>
-                    <div className="text-sm font-medium text-white">Try Nxentra free</div>
+                    <div className="text-sm font-medium text-white">{t("contactTry")}</div>
                     <div className="text-xs text-zinc-500">app.nxentra.com</div>
                   </div>
                 </a>
@@ -540,7 +510,7 @@ export default function Home() {
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                   </span>
                   <div>
-                    <div className="text-sm font-medium text-white">Email us</div>
+                    <div className="text-sm font-medium text-white">{t("contactEmail")}</div>
                     <div className="text-xs text-zinc-500">admin@nxentra.com</div>
                   </div>
                 </a>
@@ -565,7 +535,7 @@ export default function Home() {
             <span className="text-sm font-semibold text-zinc-400">Nxentra</span>
           </div>
           <p className="text-xs text-zinc-600">
-            &copy; {new Date().getFullYear()} Nxentra. All rights reserved.
+            &copy; {new Date().getFullYear()} Nxentra. {t("footerRights")}
           </p>
           <a
             href="https://app.nxentra.com"
