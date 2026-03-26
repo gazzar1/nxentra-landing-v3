@@ -2,6 +2,7 @@
 
 import { useLang } from "./components/LangProvider";
 import ContactForm from "./components/ContactForm";
+import DashboardCharts from "./components/DashboardCharts";
 import Image from "next/image";
 
 /* ------------------------------------------------------------------ */
@@ -157,9 +158,9 @@ export default function Home() {
   const { lang, setLang, t } = useLang();
 
   return (
-    <div className="min-h-screen bg-[#09090b]">
+    <div className="min-h-screen bg-[#0f1729]">
       {/* ── Navigation ──────────────────────────────────── */}
-      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#09090b]/80 backdrop-blur-xl">
+      <nav className="sticky top-0 z-50 border-b border-white/5 bg-[#0f1729]/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2">
@@ -268,7 +269,7 @@ export default function Home() {
                 />
               </div>
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 rounded-lg border border-white/10 bg-[#09090b] px-4 py-2 shadow-lg md:-left-8">
+              <div className="absolute -bottom-4 -left-4 rounded-lg border border-white/10 bg-[#0f1729] px-4 py-2 shadow-lg md:-left-8">
                 <div className="text-xs text-zinc-500">Live on</div>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-green-400 font-semibold text-sm">Shopify</span>
@@ -282,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* ── Shopify Spotlight ───────────────────────────── */}
-      <section className="relative border-y border-white/5 bg-gradient-to-r from-green-950/30 via-[#09090b] to-green-950/30">
+      <section className="relative border-y border-white/5 bg-gradient-to-r from-green-950/30 via-[#0f1729] to-green-950/30">
         <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div>
@@ -473,6 +474,21 @@ export default function Home() {
 
       <div className="section-divider" />
 
+      {/* ── Dashboard Charts ────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white md:text-4xl">Real-time financial visibility</h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">
+              Every chart is derived from live events. Revenue, expenses, cash flow, and reconciliation rates update as transactions flow in.
+            </p>
+          </div>
+          <DashboardCharts />
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
       {/* ── Numbers / Social Proof ──────────────────────── */}
       <section className="py-16">
         <div className="mx-auto max-w-6xl px-4">
@@ -517,7 +533,7 @@ export default function Home() {
                   </div>
                 </a>
                 <a
-                  href="mailto:hello@nxentra.com"
+                  href="mailto:admin@nxentra.com"
                   className="flex items-center gap-3 rounded-lg border border-white/5 bg-white/[0.02] p-4 hover:bg-white/[0.04] transition"
                 >
                   <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
@@ -525,7 +541,7 @@ export default function Home() {
                   </span>
                   <div>
                     <div className="text-sm font-medium text-white">Email us</div>
-                    <div className="text-xs text-zinc-500">hello@nxentra.com</div>
+                    <div className="text-xs text-zinc-500">admin@nxentra.com</div>
                   </div>
                 </a>
               </div>
@@ -561,7 +577,7 @@ export default function Home() {
       </footer>
 
       {/* ── Mobile sticky CTA ───────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-[#09090b]/90 backdrop-blur-lg p-3 md:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-[#0f1729]/90 backdrop-blur-lg p-3 md:hidden">
         <a
           href="https://app.nxentra.com"
           className="block w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-center text-sm font-semibold text-white"
