@@ -432,7 +432,7 @@ export default function Home() {
 
           <div className="relative aspect-video rounded-xl border border-white/10 bg-white/5 overflow-hidden shadow-2xl shadow-blue-500/10">
             <iframe
-              src="https://www.youtube.com/embed/-jN2oIwz91Y"
+              src="https://www.youtube.com/embed/unnNIdnD9qo"
               title="Nxentra Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
