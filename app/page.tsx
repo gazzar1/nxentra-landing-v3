@@ -216,7 +216,7 @@ export default function Home() {
                   {t("ctaTry")} &rarr;
                 </a>
                 <a
-                  href="https://app.nxentra.com/login"
+                  href="https://app.nxentra.com/login?demo=true"
                   target="_blank"
                   className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-6 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition"
                 >
