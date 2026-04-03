@@ -216,12 +216,23 @@ export default function Home() {
                   {t("ctaTry")} &rarr;
                 </a>
                 <a
+                  href="https://app.nxentra.com/login"
+                  target="_blank"
+                  className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-6 py-3 text-sm font-semibold text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition"
+                >
+                  {t("ctaLiveDemo")} &rarr;
+                </a>
+                <a
                   href="#video"
                   className="rounded-lg border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-zinc-300 hover:text-white hover:border-white/20 transition"
                 >
                   {t("ctaDemo")}
                 </a>
               </div>
+              {/* Demo credentials */}
+              <p className="mt-3 text-xs text-zinc-600">
+                {t("demoCredentials")}
+              </p>
 
               {/* Trust signals */}
               <div className="mt-10 flex items-center gap-6 text-xs text-zinc-500">
