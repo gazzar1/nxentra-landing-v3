@@ -143,8 +143,8 @@ const dict: Record<Lang, Record<string, string>> = {
     trustSec4Desc: "Full data export anytime. No vendor lock-in. You own your financial records.",
     trustSec5Title: "Role-based access",
     trustSec5Desc: "Granular permissions per user. Owner, Admin, User, and Viewer roles.",
-    trustSec6Title: "SOC 2-ready architecture",
-    trustSec6Desc: "Event sourcing, structured logging, and full audit trails from day one.",
+    trustSec6Title: "Structured audit logging",
+    trustSec6Desc: "Every API call, login, and data change is logged with timestamps and user context. Built for compliance from day one.",
     // Contact
     contactTitle: "Ready to take control?",
     contactSub: "Get in touch and we will set you up in minutes.",
@@ -306,8 +306,8 @@ const dict: Record<Lang, Record<string, string>> = {
     trustSec4Desc: "تصدير كامل في أي وقت. بدون احتكار. أنت تملك سجلاتك المالية.",
     trustSec5Title: "صلاحيات حسب الدور",
     trustSec5Desc: "صلاحيات دقيقة لكل مستخدم. مالك، مدير، مستخدم، مشاهد.",
-    trustSec6Title: "بنية جاهزة لـ SOC 2",
-    trustSec6Desc: "مصادر أحداث، تسجيل مهيكل، ومسارات تدقيق كاملة من اليوم الأول.",
+    trustSec6Title: "تسجيل تدقيق مهيكل",
+    trustSec6Desc: "كل استدعاء API وتسجيل دخول وتغيير بيانات مسجل بالطوابع الزمنية وسياق المستخدم. مبني للامتثال من اليوم الأول.",
     // Contact
     contactTitle: "مستعد للسيطرة؟",
     contactSub: "تواصل معنا وسنعدك في دقائق.",
