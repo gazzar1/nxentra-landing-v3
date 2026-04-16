@@ -117,14 +117,12 @@ function IconProjection() {
 /* ------------------------------------------------------------------ */
 
 const modulesMeta = [
-  { icon: <IconAccounting />, nameKey: "modAccounting", descKey: "modAccountingDesc", color: "text-blue-400" },
-  { icon: <IconSales />, nameKey: "modSales", descKey: "modSalesDesc", color: "text-emerald-400" },
-  { icon: <IconInventory />, nameKey: "modInventory", descKey: "modInventoryDesc", color: "text-amber-400" },
-  { icon: <IconPurchases />, nameKey: "modPurchases", descKey: "modPurchasesDesc", color: "text-violet-400" },
-  { icon: <IconProperties />, nameKey: "modProperties", descKey: "modPropertiesDesc", color: "text-rose-400" },
-  { icon: <IconClinic />, nameKey: "modClinic", descKey: "modClinicDesc", color: "text-cyan-400" },
   { icon: <IconShopify />, nameKey: "modShopify", descKey: "modShopifyDesc", color: "text-green-400" },
   { icon: <IconStripe />, nameKey: "modStripe", descKey: "modStripeDesc", color: "text-indigo-400" },
+  { icon: <IconAccounting />, nameKey: "modAccounting", descKey: "modAccountingDesc", color: "text-blue-400" },
+  { icon: <IconSales />, nameKey: "modSales", descKey: "modSalesDesc", color: "text-emerald-400" },
+  { icon: <IconPurchases />, nameKey: "modPurchases", descKey: "modPurchasesDesc", color: "text-violet-400" },
+  { icon: <IconInventory />, nameKey: "modInventory", descKey: "modInventoryDesc", color: "text-amber-400" },
 ];
 
 const whyCardsMeta = [
@@ -159,6 +157,7 @@ export default function Home() {
             <a href="#modules" className="text-sm text-zinc-400 hover:text-white transition">{t("navModules")}</a>
             <a href="#why" className="text-sm text-zinc-400 hover:text-white transition">{t("navWhy")}</a>
             <a href="#how" className="text-sm text-zinc-400 hover:text-white transition">{t("navHow")}</a>
+            <a href="#pricing" className="text-sm text-zinc-400 hover:text-white transition">{t("navPricing")}</a>
             <a href="#contact" className="text-sm text-zinc-400 hover:text-white transition">{t("navContact")}</a>
           </div>
 
@@ -433,6 +432,123 @@ export default function Home() {
 
       <div className="section-divider" />
 
+      {/* ── Pricing ─────────────────────────────────────── */}
+      <section id="pricing" className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-white md:text-4xl">{t("pricingTitle")}</h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">{t("pricingSub")}</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Starter */}
+            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-8 flex flex-col">
+              <h3 className="text-lg font-bold text-white">{t("pricingStarterName")}</h3>
+              <p className="mt-1 text-sm text-zinc-500">{t("pricingStarterDesc")}</p>
+              <div className="mt-6">
+                <span className="text-4xl font-extrabold text-white">{t("pricingStarterPrice")}</span>
+                <span className="text-zinc-500">{t("pricingStarterPeriod")}</span>
+              </div>
+              <ul className="mt-8 space-y-3 flex-1">
+                {["pricingStarterF1","pricingStarterF2","pricingStarterF3","pricingStarterF4","pricingStarterF5"].map((k) => (
+                  <li key={k} className="flex items-center gap-2 text-sm text-zinc-300">
+                    <svg className="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
+                    {t(k)}
+                  </li>
+                ))}
+              </ul>
+              <a href="https://app.nxentra.com" className="mt-8 block rounded-lg border border-white/10 bg-white/5 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition">
+                {t("pricingStarterCta")} &rarr;
+              </a>
+            </div>
+
+            {/* Growth - highlighted */}
+            <div className="relative rounded-xl border-2 border-blue-500/50 bg-gradient-to-b from-blue-500/10 to-transparent p-8 flex flex-col">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-xs font-semibold text-white">
+                {t("pricingGrowthBadge")}
+              </div>
+              <h3 className="text-lg font-bold text-white">{t("pricingGrowthName")}</h3>
+              <p className="mt-1 text-sm text-zinc-500">{t("pricingGrowthDesc")}</p>
+              <div className="mt-6">
+                <span className="text-4xl font-extrabold text-white">{t("pricingGrowthPrice")}</span>
+                <span className="text-zinc-500">{t("pricingGrowthPeriod")}</span>
+              </div>
+              <ul className="mt-8 space-y-3 flex-1">
+                {["pricingGrowthF1","pricingGrowthF2","pricingGrowthF3","pricingGrowthF4","pricingGrowthF5","pricingGrowthF6"].map((k) => (
+                  <li key={k} className="flex items-center gap-2 text-sm text-zinc-300">
+                    <svg className="w-4 h-4 text-blue-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
+                    {t(k)}
+                  </li>
+                ))}
+              </ul>
+              <a href="https://app.nxentra.com" className="mt-8 block rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-center text-sm font-semibold text-white hover:opacity-90 transition shadow-lg shadow-blue-500/25">
+                {t("pricingGrowthCta")} &rarr;
+              </a>
+            </div>
+
+            {/* Professional */}
+            <div className="rounded-xl border border-white/10 bg-white/[0.02] p-8 flex flex-col">
+              <h3 className="text-lg font-bold text-white">{t("pricingProName")}</h3>
+              <p className="mt-1 text-sm text-zinc-500">{t("pricingProDesc")}</p>
+              <div className="mt-6">
+                <span className="text-4xl font-extrabold text-white">{t("pricingProPrice")}</span>
+                <span className="text-zinc-500">{t("pricingProPeriod")}</span>
+              </div>
+              <ul className="mt-8 space-y-3 flex-1">
+                {["pricingProF1","pricingProF2","pricingProF3","pricingProF4","pricingProF5","pricingProF6"].map((k) => (
+                  <li key={k} className="flex items-center gap-2 text-sm text-zinc-300">
+                    <svg className="w-4 h-4 text-green-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
+                    {t(k)}
+                  </li>
+                ))}
+              </ul>
+              <a href="#contact" className="mt-8 block rounded-lg border border-white/10 bg-white/5 py-3 text-center text-sm font-semibold text-white hover:bg-white/10 transition">
+                {t("pricingProCta")} &rarr;
+              </a>
+            </div>
+          </div>
+
+          <p className="mt-8 text-center text-sm text-zinc-500">{t("pricingFreeNote")}</p>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── Trust & Security ────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-16">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5">
+              <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+              <span className="text-xs font-medium text-emerald-300">Enterprise-grade security</span>
+            </div>
+            <h2 className="text-3xl font-bold text-white md:text-4xl">{t("trustTitle")}</h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">{t("trustSub")}</p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { titleKey: "trustSec1Title", descKey: "trustSec1Desc", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" },
+              { titleKey: "trustSec2Title", descKey: "trustSec2Desc", icon: "M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" },
+              { titleKey: "trustSec3Title", descKey: "trustSec3Desc", icon: "M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" },
+              { titleKey: "trustSec4Title", descKey: "trustSec4Desc", icon: "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" },
+              { titleKey: "trustSec5Title", descKey: "trustSec5Desc", icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" },
+              { titleKey: "trustSec6Title", descKey: "trustSec6Desc", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
+            ].map((item) => (
+              <div key={item.titleKey} className="rounded-xl border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10">
+                  <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path d={item.icon} /></svg>
+                </div>
+                <h3 className="font-semibold text-white">{t(item.titleKey)}</h3>
+                <p className="mt-2 text-sm text-zinc-500 leading-relaxed">{t(item.descKey)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
       {/* ── Video ───────────────────────────────────────── */}
       <section id="video" className="py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-4">
@@ -475,7 +591,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid grid-cols-2 gap-8 md:grid-cols-4 text-center">
             {[
-              { value: "8+", labelKey: "statModules" },
+              { value: "6", labelKey: "statModules" },
               { value: "15+", labelKey: "statCurrencies" },
               { value: "3", labelKey: "statEngines" },
               { value: "<5min", labelKey: "statSetup" },

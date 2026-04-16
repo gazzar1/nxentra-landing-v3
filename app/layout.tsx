@@ -1,18 +1,38 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { LangProvider } from "./components/LangProvider";
 import "./globals.css";
 
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+
 export const metadata: Metadata = {
-  title: "Nxentra - The ERP that ingests everything",
+  title: "Nxentra - Shopify Accounting, Automated",
   description:
-    "Connect Shopify, Stripe, POS, and bank feeds into one financial truth. Auto-reconciled. Multi-currency. Audit-ready.",
+    "The accounting system built for Shopify merchants. Auto-reconcile orders, payouts, and bank deposits. Multi-currency. Audit-ready from day one.",
+  keywords: [
+    "Shopify accounting",
+    "e-commerce accounting",
+    "Shopify reconciliation",
+    "automated bookkeeping",
+    "multi-currency accounting",
+    "Shopify ERP",
+  ],
   openGraph: {
-    title: "Nxentra - The ERP that ingests everything",
+    title: "Nxentra - Shopify Accounting, Automated",
     description:
-      "Connect Shopify, Stripe, POS, and bank feeds into one financial truth. Auto-reconciled. Multi-currency. Audit-ready.",
+      "The accounting system built for Shopify merchants. Auto-reconcile orders, payouts, and bank deposits.",
     url: "https://www.nxentra.com",
     siteName: "Nxentra",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nxentra - Shopify Accounting, Automated",
+    description:
+      "Auto-reconcile Shopify orders, payouts, and bank deposits. Multi-currency. Audit-ready.",
+  },
+  alternates: {
+    canonical: "https://www.nxentra.com",
   },
 };
 
@@ -31,6 +51,17 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <LangProvider>{children}</LangProvider>
+        {GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
