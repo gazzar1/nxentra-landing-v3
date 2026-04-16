@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useLang } from "./components/LangProvider";
 import ContactForm from "./components/ContactForm";
 import DashboardCharts from "./components/DashboardCharts";
@@ -138,6 +139,10 @@ const whyCardsMeta = [
 
 export default function Home() {
   const { lang, setLang, t } = useLang();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [waitlistEmail, setWaitlistEmail] = useState("");
+  const [waitlistStatus, setWaitlistStatus] = useState<"idle" | "sent">("idle");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-[#0f1729]">
@@ -169,14 +174,49 @@ export default function Home() {
             >
               {lang === "en" ? "\u0639\u0631\u0628\u064a" : "English"}
             </button>
+            {/* Hamburger - mobile */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden rounded-lg border border-white/10 p-2 text-zinc-400 hover:text-white transition"
+              aria-label="Toggle menu"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                {mobileMenuOpen
+                  ? <path d="M6 18L18 6M6 6l12 12" />
+                  : <path d="M4 6h16M4 12h16M4 18h16" />
+                }
+              </svg>
+            </button>
             <a
               href="https://app.nxentra.com"
-              className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition"
+              className="hidden md:inline-block rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition"
             >
               {t("ctaTry")}
             </a>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-white/5 bg-[#0f1729]/95 backdrop-blur-xl px-4 py-4 space-y-3">
+            {["modules","why","how","pricing","contact"].map((id) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="block text-sm text-zinc-400 hover:text-white transition py-2"
+              >
+                {t(`nav${id.charAt(0).toUpperCase() + id.slice(1)}`)}
+              </a>
+            ))}
+            <a
+              href="https://app.nxentra.com"
+              className="block rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 py-3 text-center text-sm font-semibold text-white mt-2"
+            >
+              {t("ctaTry")} &rarr;
+            </a>
+          </div>
+        )}
       </nav>
 
       {/* ── Hero ────────────────────────────────────────── */}
@@ -599,6 +639,111 @@ export default function Home() {
               <div key={stat.labelKey}>
                 <div className="text-3xl font-bold text-gradient md:text-4xl">{stat.value}</div>
                 <div className="mt-2 text-sm text-zinc-500">{t(stat.labelKey)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── Social Proof ────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-white md:text-4xl">{t("proofTitle")}</h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto">{t("proofSub")}</p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              { quoteKey: "proofQuote1", roleKey: "proofRole1" },
+              { quoteKey: "proofQuote2", roleKey: "proofRole2" },
+            ].map((item) => (
+              <div key={item.quoteKey} className="rounded-xl border border-white/5 bg-white/[0.02] p-8">
+                <svg className="w-8 h-8 text-blue-500/30 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" /></svg>
+                <p className="text-zinc-300 leading-relaxed italic">&ldquo;{t(item.quoteKey)}&rdquo;</p>
+                <p className="mt-4 text-sm text-zinc-500">{t(item.roleKey)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── Email Capture / Waitlist ─────────────────────── */}
+      <section className="py-16">
+        <div className="mx-auto max-w-2xl px-4 text-center">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">{t("earlyAccessTitle")}</h2>
+          <p className="mt-3 text-zinc-400">{t("earlyAccessSub")}</p>
+          {waitlistStatus === "sent" ? (
+            <div className="mt-6 flex items-center justify-center gap-2 text-green-400 text-sm font-medium">
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path d="M5 13l4 4L19 7" /></svg>
+              {t("earlyAccessSent")}
+            </div>
+          ) : (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!waitlistEmail) return;
+                try {
+                  await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name: "Waitlist", email: waitlistEmail, role: "Waitlist signup", message: "Waitlist signup from landing page" }),
+                  });
+                  setWaitlistStatus("sent");
+                } catch { setWaitlistStatus("sent"); }
+              }}
+              className="mt-6 flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+            >
+              <input
+                type="email"
+                required
+                value={waitlistEmail}
+                onChange={(e) => setWaitlistEmail(e.target.value)}
+                placeholder={t("earlyAccessPlaceholder")}
+                className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-zinc-500 focus:border-blue-500/50 focus:outline-none transition"
+              />
+              <button
+                type="submit"
+                className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-500 px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition whitespace-nowrap"
+              >
+                {t("earlyAccessCta")} &rarr;
+              </button>
+            </form>
+          )}
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* ── FAQ ─────────────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-3xl px-4">
+          <h2 className="text-center text-3xl font-bold text-white md:text-4xl mb-12">{t("faqTitle")}</h2>
+
+          <div className="space-y-3">
+            {[1,2,3,4,5].map((n) => (
+              <div key={n} className="rounded-xl border border-white/5 bg-white/[0.02] overflow-hidden">
+                <button
+                  onClick={() => setOpenFaq(openFaq === n ? null : n)}
+                  className="flex w-full items-center justify-between p-5 text-left"
+                >
+                  <span className="text-sm font-medium text-white">{t(`faqQ${n}`)}</span>
+                  <svg
+                    className={`w-5 h-5 text-zinc-400 shrink-0 transition-transform ${openFaq === n ? "rotate-180" : ""}`}
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"
+                  >
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {openFaq === n && (
+                  <div className="px-5 pb-5 text-sm text-zinc-400 leading-relaxed">
+                    {t(`faqA${n}`)}
+                  </div>
+                )}
               </div>
             ))}
           </div>
