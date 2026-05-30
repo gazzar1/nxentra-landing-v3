@@ -162,7 +162,9 @@ export default function Home() {
             <a href="#modules" className="text-sm text-zinc-400 hover:text-white transition">{t("navModules")}</a>
             <a href="#why" className="text-sm text-zinc-400 hover:text-white transition">{t("navWhy")}</a>
             <a href="#how" className="text-sm text-zinc-400 hover:text-white transition">{t("navHow")}</a>
-            <a href="#pricing" className="text-sm text-zinc-400 hover:text-white transition">{t("navPricing")}</a>
+            {/* Pricing nav hidden 2026-05-30 during Shopify App Store review — listing says $0/month;
+                avoid surfacing the SaaS tier prices ($29/$79/$149) until pricing strategy is finalised. */}
+            {/* <a href="#pricing" className="text-sm text-zinc-400 hover:text-white transition">{t("navPricing")}</a> */}
             <a href="#contact" className="text-sm text-zinc-400 hover:text-white transition">{t("navContact")}</a>
           </div>
 
@@ -199,7 +201,8 @@ export default function Home() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/5 bg-[#0f1729]/95 backdrop-blur-xl px-4 py-4 space-y-3">
-            {["modules","why","how","pricing","contact"].map((id) => (
+            {/* "pricing" hidden 2026-05-30 — see desktop-nav comment above */}
+            {["modules","why","how","contact"].map((id) => (
               <a
                 key={id}
                 href={`#${id}`}
@@ -470,9 +473,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Pricing — HIDDEN 2026-05-30 during Shopify App Store review ─────────
+          App Store listing publishes Nxentra Sync as $0/month. Showing
+          $29/$79/$149 tiers here would contradict the listing and risk
+          reviewer rejection on misleading-pricing grounds. Re-enable
+          (uncomment this block + restore the nav link in the desktop
+          menu and mobile array above) once pricing strategy is finalised.
+      ──────────────────────────────────────────────────────────────────── */}
+      {/*
       <div className="section-divider" />
 
-      {/* ── Pricing ─────────────────────────────────────── */}
       <section id="pricing" className="py-20 md:py-28">
         <div className="mx-auto max-w-6xl px-4">
           <div className="text-center mb-16">
@@ -481,7 +491,6 @@ export default function Home() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {/* Starter */}
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-8 flex flex-col">
               <h3 className="text-lg font-bold text-white">{t("pricingStarterName")}</h3>
               <p className="mt-1 text-sm text-zinc-500">{t("pricingStarterDesc")}</p>
@@ -502,7 +511,6 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Growth - highlighted */}
             <div className="relative rounded-xl border-2 border-blue-500/50 bg-gradient-to-b from-blue-500/10 to-transparent p-8 flex flex-col">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-xs font-semibold text-white">
                 {t("pricingGrowthBadge")}
@@ -526,7 +534,6 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Professional */}
             <div className="rounded-xl border border-white/10 bg-white/[0.02] p-8 flex flex-col">
               <h3 className="text-lg font-bold text-white">{t("pricingProName")}</h3>
               <p className="mt-1 text-sm text-zinc-500">{t("pricingProDesc")}</p>
@@ -553,6 +560,7 @@ export default function Home() {
       </section>
 
       <div className="section-divider" />
+      */}
 
       {/* ── Trust & Security ────────────────────────────── */}
       <section className="py-20 md:py-28">
